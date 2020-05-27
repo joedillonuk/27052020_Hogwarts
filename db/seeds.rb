@@ -1,5 +1,7 @@
 require_relative('../models/student.rb')
 require_relative('../models/house.rb')
+require( 'pry-byebug' )
+
 
 house1 = House.new({
   "name" => "Gryffindor",
@@ -27,16 +29,19 @@ house4.save()
 student1 = Student.new({
   "first_name" => "Harry",
   "second_name" => "Potter",
-  "house" => "Gryffindor",
+  "house" => house1.id,
   "age" => 12
   })
 
   student2 = Student.new({
     "first_name" => "Ron",
     "second_name" => "Weasely",
-    "house" => "Hufflepuff",
+    "house" => house3.id,
     "age" => 12
     })
 
     student1.save()
     student2.save()
+
+binding.pry
+nil

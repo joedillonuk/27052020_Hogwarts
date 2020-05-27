@@ -8,7 +8,7 @@ class Student
     @id = options['id'].to_i if options['id']
     @first_name = options['first_name']
     @second_name = options['second_name']
-    @house = options['house']
+    @house = options['house'].to_i
     @age = options['age'].to_i
   end
 
@@ -30,6 +30,15 @@ class Student
     @id = pg_result.first()['id'].to_i
   end
 
+
+  def house_name()
+    sql = "SELECT name FROM houses WHERE id = $1"
+    values = [@house]
+    pg_result = SqlRunner.run(sql, values).first
+    return pg_result['name']
+  end
+
+
 def self.all()
   sql = "SELECT * FROM students"
   pg_result = SqlRunner.run(sql)
@@ -44,6 +53,8 @@ def self.find(id)
   result = Student.new(pg_result.first)
   return result
 end
+
+
 
 
 end
